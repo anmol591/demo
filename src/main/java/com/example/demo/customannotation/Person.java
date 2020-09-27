@@ -1,20 +1,26 @@
 package com.example.demo.customannotation;
 
 import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @JsonSerializable
 public class Person {
 
     @JsonElement
+    @NonNull
     private String firstName;
 
     @JsonElement
+    @NonNull
     private String lastName;
 
     @JsonElement(key = "personAge")
+    @NonNull
     private String age;
 
+    @NonNull
     private String address;
 
     @Init

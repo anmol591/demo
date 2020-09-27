@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class ObjectToJsonConverter {
 
-    private String convertToJson(Object object) throws InvocationTargetException, IllegalAccessException {
+    public String convertToJson(Object object) throws InvocationTargetException, IllegalAccessException {
         try {
             checkIfSerializable(object);
             initializeObject(object);
@@ -22,17 +22,16 @@ public class ObjectToJsonConverter {
 
     private void checkIfSerializable(Object object){
         if(object == null)
-            throw new JsonSerializationException("cannot serialize null object");
-
+            throw new JsonSerializationException("can't serialize null object");
         Class<?> clazz = object.getClass();
         if(!clazz.isAnnotationPresent(JsonSerializable.class))
-            throw new JsonSerializationException("This class" + clazz.getSimpleName() + "is not annotated with jsonserialize");
+            throw new JsonSerializationException("Object with class: " + clazz.getSimpleName() + "is not annotated with jsonserializable");
 
     }
 
     private void initializeObject(Object object) throws InvocationTargetException, IllegalAccessException {
         Class<?> clazz = object.getClass();
-        for(Method method :  clazz.getDeclaredMethods()){
+        for(Method method : clazz.getDeclaredMethods()){
             if(method.isAnnotationPresent(Init.class)){
                 method.setAccessible(true);
                 method.invoke(object);
@@ -42,15 +41,15 @@ public class ObjectToJsonConverter {
 
     private String getJsonString(Object object) throws IllegalAccessException {
         Class<?> clazz = object.getClass();
-        Map<String,String> jsonElementsMap = new HashMap<>();
+        Map<String,String> jsonElement = new HashMap<>();
         for(Field field : clazz.getDeclaredFields()){
             field.setAccessible(true);
             if(field.isAnnotationPresent(JsonElement.class)){
-                jsonElementsMap.put(getKey(field),(String) field.get(object));
+                jsonElement.put(getKey(field),(String) field.get(object));
             }
         }
 
-        String jsonString = jsonElementsMap.entrySet()
+        String jsonString = jsonElement.entrySet()
                 .stream()
                 .map(entry -> "\"" + entry.getKey() + "\":\"" + entry.getValue() + "\"")
                 .collect(Collectors.joining(","));
