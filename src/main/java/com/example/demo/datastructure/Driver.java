@@ -76,7 +76,4 @@ public class Driver {
     public static String checkFun(){
         return null;
     }
-
-    //feature1 feature
-    public static String checkName(){return null;}
 }
