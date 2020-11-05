@@ -76,7 +76,4 @@ public class Driver {
     public static String checkFun(){
         return null;
     }
-
-    //adding new funtion for revert testing: feature_branch
-    public static String checkName(){return null;}
 }
