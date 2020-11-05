@@ -88,4 +88,7 @@ public class FunController {
     }
      //adding for revert testing: feature_branch1
     public String findByName(){return null;}
+
+    //adding feature2
+    public String findByValue(){return null;}
 }
