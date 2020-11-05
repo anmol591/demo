@@ -21,6 +21,9 @@ public class Actor {
     @Column(name="last_update")
     private Date lastUpdate;
 
+//    @OneToOne(mappedBy = "actor")
+//    private Salary salary;
+
     public Actor(){
 
     }

@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.TestEntity;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,11 +22,15 @@ public class TestController {
     private Validator beanValidator;
 
     @GetMapping("/hii")
-    public String hii(HttpServletRequest request){
-        TestEntity entity = new TestEntity();
-        Set<ConstraintViolation<TestEntity>> violations = beanValidator.validate(entity);
-        if(CollectionUtils.isNotEmpty(violations)){
-            return violations.iterator().next().getMessage();
+    public String hii(TestEntity request){
+        //TestEntity entity = new TestEntity();
+//        System.out.println("starting validation");
+//        Set<ConstraintViolation<TestEntity>> violations = beanValidator.validate(request);
+//        if(CollectionUtils.isNotEmpty(violations)){
+//            return violations.iterator().next().getMessage();
+//        }
+        if(StringUtils.isBlank(request.getJwt())){
+            return "306";
         }
         return "hhhh";
     }

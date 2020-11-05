@@ -1,10 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Actor;
+import com.example.demo.entity.Salary;
 import com.example.demo.service.ActorService;
+import com.example.demo.service.SalaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -12,6 +15,9 @@ import java.util.List;
 public class FunController {
 
     private ActorService theActor;
+
+    @Autowired
+    private SalaryService salaryService;
 
     @Autowired
     public FunController(ActorService actorService){
@@ -25,8 +31,8 @@ public class FunController {
 
     //create actor
     @PostMapping("/actors")
-    public Actor createActor(@RequestBody Actor actor){
-        actor.setActorId(0);
+    public Actor createActor(){
+        Actor actor = new Actor("Raghav","chadda",new Date());
 
         theActor.createOrUpdateActor(actor);
 
@@ -66,5 +72,18 @@ public class FunController {
             throw new RuntimeException("Actor Id not found" + actorId);
 
         return actor;
+    }
+
+    @GetMapping("/salary")
+    public List<Salary> findAllSalary(){
+        return salaryService.findAll();
+    }
+
+    @GetMapping("/salary/max")
+    public String findMaxSalary(){
+        Float maxSalary = salaryService.findMaxSalary();
+        if(maxSalary != null)
+            System.out.println("Maximum salary" + maxSalary);
+        return "max salary";
     }
 }
