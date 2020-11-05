@@ -86,4 +86,6 @@ public class FunController {
             System.out.println("Maximum salary" + maxSalary);
         return "max salary";
     }
+     //adding for revert testing: feature_branch1
+    public String findByName(){return null;}
 }
