@@ -5,14 +5,14 @@ public class ChecksumUtility {
 
     public static void createChecksum() throws Exception {
         /* initialize JSON String */
-        String body = "{\"mid\":\"PTMAIP50605021738524\",\"orderId\":\"12492163864\"}";
+        String body = "{\"mid\":\"AliSub58582630351896\",\"subsId\":\"100000001469\"}";
 
        /**
             * Generate checksum by parameters we have in body
              * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys
        */
 
-        String paytmChecksum = PaytmChecksum.generateSignature(body, "dfdfjjkj987DESF");
+        String paytmChecksum = PaytmChecksum.generateSignature(body, "ndZfEbE7QyePyzlp");
         System.out.println("generateSignature Returns: " + paytmChecksum);
     }
 
