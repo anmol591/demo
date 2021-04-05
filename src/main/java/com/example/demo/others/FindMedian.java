@@ -9,8 +9,8 @@ public class FindMedian {
             Float y = (float)Math.min(first[endingIndexFirst],second[endingIndexSecond]);
             return (x+y)/2;
         }
-        Float m1 = calculateMedian(first);
-        Float m2 = calculateMedian(second);
+        Float m1 = calculateMedian(first,startingIndexFirst,endingIndexFirst);
+        Float m2 = calculateMedian(second,startingIndexSecond,endingIndexSecond);
 
         int middleIndexOfFirst = (startingIndexFirst+endingIndexFirst)/2;
         int middleIndexOfSecond = (startingIndexSecond+endingIndexSecond)/2;
@@ -21,16 +21,16 @@ public class FindMedian {
 
     }
 
-    public static Float calculateMedian(int arr[]){
-        int n = arr.length;
+    public static Float calculateMedian(int arr[],int start,int end){
+        int n = end-start+1;
         if(n%2 == 0)
-            return  (float)(arr[n/2-1] + arr[n/2])/2;
-        return (float) arr[n/2];
+            return  (float)(arr[start+n/2-1] + arr[start+n/2])/2;
+        return (float) arr[start + n/2];
     }
 
     public static void main(String[] args){
-        int arr1[] = {1, 2};
-        int arr2[] = {3, 4};
+        int arr1[] = {2,6,9,10,11};
+        int arr2[] = {1,5,7,12,15};
         if(arr1.length == arr2.length){
             System.out.println("Median is: "+ getMedian(arr1,0,arr1.length-1,arr2,0,arr2.length-1));
         }
