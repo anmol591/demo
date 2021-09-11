@@ -54,15 +54,24 @@ public class LRUCache {
     }
 
     public void set(int key,int value){
-        DoublyLinkedListNode node = new DoublyLinkedListNode(key,value);
-        map.put(key,node);
-      if(count < capacity){
-         addNodeToHead(node);
-         count++;
-      }else{
-          deleteNode(tail.prev);
-          addNodeToHead(node);
-      }
+        if(map.get(key)!=null){
+            DoublyLinkedListNode node = map.get(key);
+            node.value = value;
+            deleteNode(node);
+            addNodeToHead(node);
+        }else{
+            DoublyLinkedListNode node = new DoublyLinkedListNode(key,value);
+            map.put(key,node);
+            if(count < capacity){
+                addNodeToHead(node);
+                count++;
+            }else{
+                map.remove(tail.prev.key);
+                deleteNode(tail.prev);
+                addNodeToHead(node);
+            }
+        }
+
     }
 
     public int LruElement(){
