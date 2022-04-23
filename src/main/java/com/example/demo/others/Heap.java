@@ -34,7 +34,7 @@ public class Heap {
     }
 
     public static void main(String[] args){
-        int arr[] = {3,5,9,6,8,20,10,12, 19,18,2};
+        int arr[] = {0,2,4,1,5,3,15};
         int size = arr.length;
         buildHeap(arr,size);
     }

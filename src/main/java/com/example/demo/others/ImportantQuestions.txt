@@ -1,0 +1,116 @@
+//Array questions
+Q-> count inversions in an array(merge sort approach)
+Q-> find minimum distance between two numbers in an array
+
+Q-> circular queue/deque implementation
+
+//Tree questions
+Q-> find kth smallest and kth largest element in bst
+Q-> convert binary tree to bst maintaining its structure
+Q-> construct special binary tree from given inorder traversal
+Q-> construct tree from given inorder and preorder traversal
+Q-> find floor and ceil in a bst
+Q-> connect nodes at each level
+Q-> construct tree from given inorder and postorder traversal
+Q-> tree is sumtree or not
+Q-> reverse level order traversal of binary tree
+Q-> inplace conversion of binary tree into sumTree
+Q-> Flatten a linked list
+
+
+
+//String important questions
+Q-> Length of longest substring without repeating characters
+Q-> Recursively remove all adjacent duplicates in a string
+Ans: https://www.techiedelight.com/in-place-remove-all-adjacent-duplicates-from-string/
+Q-> Lexicographically largest string possible in one swap
+Q-> Lexicographically smallest string of the given string
+Q-> Determine whether two strings are anagram or not
+Q-> Convert a number into a corresponding excel column name(Imp)
+https://www.geeksforgeeks.org/find-excel-column-name-given-number/
+
+
+//sliding window techniques problems(most important)
+Q-> Minimum sum subarray of size k
+
+
+//Matrix questions
+https://www.geeksforgeeks.org/search-element-sorted-matrix/
+https://www.geeksforgeeks.org/efficiently-implement-k-stacks-single-array/(Important)
+Given an m x n integer matrix matrix, if an element is 0, set its entire row and column to 0's, and return the matrix //in place
+
+
+
+
+
+
+
+
+
+//Backtracking problems(Important)
+Q->https://www.geeksforgeeks.org/print-all-possible-paths-from-top-left-to-bottom-right-of-a-mxn-matrix/
+Q->https://www.geeksforgeeks.org/count-possible-paths-top-left-bottom-right-nxm-matrix/
+Q-> https://www.geeksforgeeks.org/count-number-ways-reach-destination-maze/
+
+
+//scaler problems
+Q-> given an array of size N. find the no of distinct elements in every subarray of size k
+Q-> count special elements in an array (Not found on web)
+Q-> count equilibrium index in an array in constant space
+Q-> Find the Minimum length Unsorted Subarray, sorting which makes the complete array sorted
+Q-> Choose k array elements such that difference of maximum and minimum is minimized
+Q-> Partition a set into two subsets such that difference between max of one and min of other is minimized. Return two subsets.
+Q-> Given 3 sorted arrays- A[],B[],C[]. find i,j,k such that max(A[i],B[j],C[k]) - min(A[i],B[j],C[k]) is minimized
+Q-> Longest subarray with equal 1's & 0's
+Q-> Prefix sum matrix
+    1) rowwise prefix sum
+    2) columnwise prefix sum
+Q-> Given a matrix, it is rowwise sorted & columnwise sorted. find max submatrix sum
+Q-> Given an array of size N. find smallest missing positive no in this.
+Ans: https://www.interviewbit.com/blog/smallest-positive-missing-number/
+
+Q-> Find smallest prime factors of all numbers till N (2->N)(Imp asked in FB)
+Q-> Find smallest prime factor of the given no
+Q-> Given N, count no of divisors of N
+Q-> Check whether a given number is an ugly number or not
+
+
+//Dp problems
+Q-> longest common subsequence
+Ans: https://www.youtube.com/watch?v=43P0xZp3FU4&ab_channel=VivekanandKhyade-AlgorithmEveryDay
+
+Q-> Minimum edit distance problem
+https://www.youtube.com/watch?v=b6AGUjqIPsA&t=827s&ab_channel=VivekanandKhyade-AlgorithmEveryDay
+
+Q-> Longest increasing subsequence
+Ans: https://www.youtube.com/watch?v=E6us4nmXTHs
+
+Q-> Minimum no of jumps required to reach at end
+Q-> subset sum problem
+Q-> Matrix chain multiplication
+Q->longest palindromic subsequence and its length
+https://www.youtube.com/watch?v=yZWmS6CXbQc
+Q->longest palindromic substring
+Ans: https://www.geeksforgeeks.org/longest-palindromic-substring-set-2/    [t=n^2,s=o(1)]
+Ans: https://www.geeksforgeeks.org/longest-palindrome-substring-set-1/     [t=n^2,s=n^2]
+Q-> find-maximum-profit-earned-at-most-k-stock-transactions
+
+
+swiggy Questions:-
+1) Maximum profit in job scheduling
+2) flexible string - find union and count
+https://leetcode.com/problems/permutations-ii/solution/
+
+Mathematical stuffs:-
+1) prime nos
+2) Modular Exponentiation
+3) composite nos
+4) power function implementation
+5) Gcd of two nos
+6) Even no/odd no
+7) Sieve of Eratosthenes
+8) Euclidean algorithm
+
+
+25  has no prime factor less than 5, and 3 has no prime factor less than 1.732; however,
+it is true that every composite number has a prime factor less than or equal to its square root.

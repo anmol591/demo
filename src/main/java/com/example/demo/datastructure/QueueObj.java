@@ -4,7 +4,7 @@ public class QueueObj {
     Node node;
     int hd;
 
-    QueueObj(Node node,int hd){
+    public QueueObj(Node node,int hd){
         this.node = node;
         this.hd = hd;
     }

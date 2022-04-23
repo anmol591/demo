@@ -2,6 +2,8 @@ package com.example.demo.others;
 
 import java.util.Vector;
 
+//suppose you already have min heap now you have to add new element in this heap
+// then this approach is valid. For more: https://www.geeksforgeeks.org/insertion-and-deletion-in-heaps/
 //create min heap using array
 public class MinHeap {
 

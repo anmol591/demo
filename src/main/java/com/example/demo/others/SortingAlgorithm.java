@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class SortingAlgorithm {
+    //this merge method can be implemented using single temp array
+    // use : https://www.interviewbit.com/tutorial/merge-sort-algorithm/
     private static void mergeSortUtil(int arr[],int l,int m,int r){
         // Find sizes of two subarrays to be merged
         int n1 = m - l + 1;

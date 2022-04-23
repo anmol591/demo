@@ -39,9 +39,9 @@ public class Kthsmallest {
     }
 
     public static void main(String[] args){
-        int arr[] = {4,8,2,9,12,17,32,1};
+        int arr[] = {4,3,5,8};
         int len = arr.length;
-        int k = 3;
+        int k = 2;
         System.out.println(findKthSmallest(arr,0,len-1,k));
     }
 }

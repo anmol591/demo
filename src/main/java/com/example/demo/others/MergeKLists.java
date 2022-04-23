@@ -1,5 +1,5 @@
 package com.example.demo.others;
-
+//merge k sorted linked lists
 public class MergeKLists {
     private static Node sortedMerge(Node a, Node b){
         Node result = null;
