@@ -1,6 +1,17 @@
 package com.example.demo.others;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
 
 class Lis{
     private int max;
@@ -25,6 +36,41 @@ class Lis{
 
     public void setIndex(int index) {
         this.index = index;
+    }
+}
+class Job{
+    private int startTime;
+    private int endTime;
+    private int profit;
+
+    public Job(int startTime, int endTime, int profit) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.profit = profit;
+    }
+
+    public int getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(int startTime) {
+        this.startTime = startTime;
+    }
+
+    public int getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(int endTime) {
+        this.endTime = endTime;
+    }
+
+    public int getProfit() {
+        return profit;
+    }
+
+    public void setProfit(int profit) {
+        this.profit = profit;
     }
 }
 
@@ -180,10 +226,22 @@ public class Dp {
 
         /* else, check if sum can be obtained
         by any of the following
-            (a) including the last element
-            (b) excluding the last element */
+            (a) excluding the last element
+            (b) including the last element */
         return isSubsetSum(set, n - 1, sum)
                 || isSubsetSum(set, n - 1, sum - set[n - 1]);
+    }
+
+    public static boolean subsetsumExistv2(int set[],int sum,int n,int currIndex){
+        if(sum == 0)
+            return true;
+        if(currIndex > n-1)
+            return false;
+        if(set[currIndex] > sum)
+            return subsetsumExistv2(set,sum,n,currIndex+1);
+
+        return subsetsumExistv2(set,sum,n,currIndex+1) || subsetsumExistv2(set,sum-set[currIndex],n,currIndex+1);
+
     }
 
     public static boolean isSubsetSumExist(int set[],
@@ -275,12 +333,81 @@ public class Dp {
 
     }
 
-    public static void main(String[] args){
-        int arr[] = {3,2,1};
-        int n = arr.length;
-//        Lis lis = new Lis(1,0);
-//        findLIS(arr,n,lis);
-        System.out.println(minimumJumps(arr,n));
+    //weighted-job-scheduling problem using dynamic programming
+    //https://www.youtube.com/watch?v=cr6Ip0J9izc
+    public static int maximumProfitAfterSchedulingJob(Job[] jobs){
+        if(!Objects.isNull(jobs)) {
+            Arrays.sort(jobs, new Comparator<Job>() {
+                @Override
+                public int compare(Job o1, Job o2) {
+                    return o1.getEndTime() - o2.getEndTime();
+                }
+            });
+        }
+      int[] t = new int[jobs.length];
+      int maxValue = Integer.MIN_VALUE;
+      for(int i=0;i< jobs.length;i++){
+          t[i] = jobs[i].getProfit();
+      }
 
+      for(int i=1;i<jobs.length;i++){
+          for(int j=0;j<i;j++){
+              if(jobs[j].getEndTime()<=jobs[i].getStartTime()){
+                  t[i] = Math.max(t[i],jobs[i].getProfit()+t[j]);
+              }
+          }
+      }
+      for(int val : t){
+          maxValue = Math.max(val,maxValue);
+      }
+      return maxValue;
+    }
+
+
+    //print all subsets of the given array
+    public static void printAllSubset(List<Integer>currList,int currIndex,int[] arr,List<List<Integer>>output){
+        if(currIndex == arr.length){
+            output.add(new ArrayList<>(currList));
+            return;
+        }
+
+        currList.add(arr[currIndex]);
+        printAllSubset(currList,currIndex+1,arr,output);
+        currList.remove(currList.size()-1);
+        printAllSubset(currList,currIndex+1,arr,output);
+
+    }
+
+    public static void display(StringBuilder s){
+        return;
+
+    }
+
+    public static void main(String[] args){
+//        Job[] jobs = new Job[6];
+//        jobs[0] = new Job(1,3,5);
+//        jobs[1] = new Job(2,5,6);
+//        jobs[2] = new Job(7,9,2);
+//        jobs[3] = new Job(4,6,5);
+//        jobs[4] = new Job(6,7,4);
+//        jobs[5] = new Job(5,8,11);
+//        System.out.println(maximumProfitAfterSchedulingJob(jobs));
+        //Main List for storing all subsets
+//        List<List<Integer>> subset = new ArrayList<>();
+//
+//        int[] arr = {1,2,3};
+//
+//        printAllSubset(new ArrayList<>(),0,arr,subset);
+//        System.out.println(subset);
+//        int[] set = {3,4,5};
+//        int sum = 11;
+//        System.out.println(subsetsumExistv2(set,sum,3,0));
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        System.out.println(calendar.getTime());
     }
 }

@@ -1,8 +1,10 @@
 //Array questions
 Q-> count inversions in an array(merge sort approach)
 Q-> find minimum distance between two numbers in an array
-
+Q-> median of two sorted arrays
 Q-> circular queue/deque implementation
+Q-> find-a-peak-in-a-given-array
+Q-> find-the-smallest-positive-number-missing-from-an-unsorted-array
 
 //Tree questions
 Q-> find kth smallest and kth largest element in bst
@@ -16,6 +18,7 @@ Q-> tree is sumtree or not
 Q-> reverse level order traversal of binary tree
 Q-> inplace conversion of binary tree into sumTree
 Q-> Flatten a linked list
+Q-> largest bst in a binary tree
 
 
 
@@ -73,6 +76,10 @@ Q-> Find smallest prime factors of all numbers till N (2->N)(Imp asked in FB)
 Q-> Find smallest prime factor of the given no
 Q-> Given N, count no of divisors of N
 Q-> Check whether a given number is an ugly number or not
+Q-> Given length of N ropes. The cost of merging two ropes is equal to sum of the ropes getting merged. find the minimum cost required to merged
+    all the ropes into a single rope;
+Q-> find a peak element in a given array
+Q-> count frequency of all elements of array in constant space
 
 
 //Dp problems
@@ -111,6 +118,27 @@ Mathematical stuffs:-
 7) Sieve of Eratosthenes
 8) Euclidean algorithm
 
+New Topics:
+Activity selection problem - greedy
+fractional knapsack problem
+job scheduling problem:-
+ https://www.geeksforgeeks.org/job-sequencing-problem/ - greedy
+ https://www.geeksforgeeks.org/weighted-job-scheduling/ - Dp
+ https://github.com/mission-peace/interview/blob/master/src/com/interview/binarysearch/MedianOfTwoSortedArrayOfDifferentLength.java
+
 
 25  has no prime factor less than 5, and 3 has no prime factor less than 1.732; however,
 it is true that every composite number has a prime factor less than or equal to its square root.
+
+ElasticSearch is built for string matching so as long as our search key is small we can use relational db in that case
+otherwise string based database
+
+All anagrams are permutations of each other, but not all permutations are anagrams
+
+peak vallley gap > cooldown period then peak valley approach will always work
+top down approach -> recursion + memoization
+bottom up -> tabulation
+
+
+Subset problem:
+equal sum partition of a subset

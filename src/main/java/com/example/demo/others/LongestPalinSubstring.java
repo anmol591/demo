@@ -107,4 +107,8 @@ public class LongestPalinSubstring {
                 str.substring(
                         low, high + 1));
     }
+
+    public static void main(String[] args){
+        longestPalindromicSubstring("geeks");
+    }
 }

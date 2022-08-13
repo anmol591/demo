@@ -22,6 +22,7 @@ public class GraphTraversal {
 
     private void addEdge(int s,int d){
         adjList[s].add(d);
+        adjList[d].add(s);
     }
 
     public void bfs(int source){
@@ -44,7 +45,7 @@ public class GraphTraversal {
 
     private void dfsUtil(int source,boolean visited[]){
        visited[source] = true;
-        System.out.println(source + " ");
+        System.out.print(source + " ");
         Iterator<Integer> it = adjList[source].listIterator();
         while(it.hasNext()){
             int value = it.next();
@@ -104,17 +105,116 @@ public class GraphTraversal {
         return false;
     }
 
-    public static void main(String args[]){
-        GraphTraversal g = new GraphTraversal(4);
-        g.addEdge(0,1);
-        g.addEdge(0,2);
-        g.addEdge(1,2);
-        g.addEdge(2,0);
+    //count no of connected components when graph is represented as adjList
+    public int countNoOfConnectedComponents(){
+         boolean[] visited = new boolean[noOfVertices];
+         int count = 0;
+         for(int i=0;i<noOfVertices;i++){
+             if(!visited[i]){
+                 dfsUtil(i,visited);
+                 ++count;
+             }
 
-        g.addEdge(3,1);
-        if(g.isCyclic())
-        System.out.println("Cycle exists");
-        else
-        System.out.println("cycle does not exist");
+         }
+         return count;
+    }
+
+    public static int countIslands(int M[][])
+    {
+        // Make a bool array to mark visited cells.
+        // Initially all cells are unvisited
+        if(M.length == 0)
+            return 0;
+        int ROW = M.length;
+        int COL = M[0].length;
+        boolean visited[][] = new boolean[ROW][COL];
+
+        // Initialize count as 0 and traverse through the all cells
+        // of given matrix
+        int count = 0;
+        for (int i = 0; i < ROW; ++i)
+            for (int j = 0; j < COL; ++j)
+                if (M[i][j] == 1 && !visited[i][j]) // If a cell with
+                { // value 1 is not
+                    // visited yet, then new island found, Visit all
+                    // cells in this island and increment island count
+                    DFS2(M, i, j, visited,ROW,COL);
+                    ++count;
+                }
+
+        return count;
+    }
+
+    // A utility function to do DFS for a 2D boolean matrix.
+    // It only considers the 8 neighbors as adjacent vertices
+    public static void DFS(int M[][], int row, int col, boolean visited[][], int ROW, int COL)
+    {
+        // These arrays are used to get row and column numbers
+        // of 8 neighbors of a given cell
+        int rowNbr[] = new int[] { -1, -1, -1, 0, 0, 1, 1, 1 };
+        int colNbr[] = new int[] { -1, 0, 1, -1, 1, -1, 0, 1 };
+
+        // Mark this cell as visited
+        visited[row][col] = true;
+
+        // Recur for all connected neighbours
+        for (int k = 0; k < 8; ++k)
+            if (isSafe(M, row + rowNbr[k], col + colNbr[k], visited,ROW,COL))
+                DFS(M, row + rowNbr[k], col + colNbr[k], visited,ROW,COL);
+    }
+
+    public static void DFS2(int M[][], int row, int col, boolean visited[][], int ROW, int COL)
+    {
+        // These arrays are used to get row and column numbers
+        // of 8 neighbors of a given cell
+//        int rowNbr[] = new int[] { -1, -1, -1, 0, 0, 1, 1, 1 };
+//        int colNbr[] = new int[] { -1, 0, 1, -1, 1, -1, 0, 1 };
+
+        // Mark this cell as visited
+        visited[row][col] = true;
+
+        // Recur for all connected neighbours
+        int k = 0;
+        if (isSafe(M, row + 1, col, visited,ROW,COL))
+            DFS2(M, row + 1, col, visited,ROW,COL);
+
+        if (isSafe(M, row, col+1, visited,ROW,COL))
+            DFS2(M, row, col+1, visited,ROW,COL);
+
+        if (isSafe(M, row-1, col, visited,ROW,COL))
+            DFS2(M, row-1, col, visited,ROW,COL);
+
+        if (isSafe(M, row, col-1, visited,ROW,COL))
+            DFS2(M, row, col-1, visited,ROW,COL);
+    }
+
+    public static boolean isSafe(int M[][], int row, int col,
+                   boolean visited[][],int ROW,int COL)
+    {
+        // row number is in range, column number is in range
+        // and value is 1 and not yet visited
+        return (row >= 0) && (row < ROW) && (col >= 0) && (col < COL) && (M[row][col] == 1 && !visited[row][col]);
+    }
+
+    public static void main(String args[]){
+//        GraphTraversal g = new GraphTraversal(6);
+//        g.addEdge(1,5);
+//        g.addEdge(0,2);
+//
+//        g.addEdge(2,4);
+//
+//        System.out.println(g.countNoOfConnectedComponents());
+//        if(g.isCyclic())
+//        System.out.println("Cycle exists");
+//        else
+//        System.out.println("cycle does not exist");
+
+
+        int M[][] = new int[][] { { 1, 0, 0, 0, 0 },
+                { 1, 1, 0, 0, 1 },
+                { 0, 0, 0, 0, 1 },
+                { 0, 0, 0, 1, 0 },
+                { 1, 0, 0, 0, 1 } };
+        System.out.println(countIslands(M));
     }
 }

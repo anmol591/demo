@@ -3,8 +3,11 @@ package com.example.demo.others;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.commons.lang3.time.DateUtils;
 
+import javax.validation.constraints.NotNull;
 import java.lang.reflect.Array;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -947,11 +951,75 @@ public class Main {
         return calendar.getTime();
     }
 
+    private static void test1(){
+        for(int i = 0;i<50;i++){
+            test2(i);
+        }
+    }
+
+    private static void test2(int i){
+        if(i == 10)
+            return;
+        System.out.println(i);
+    }
+
+    public static int minCostClimbingStairs(int[] cost) {
+        // The array's length should be 1 longer than the length of cost
+        // This is because we can treat the "top floor" as a step to reach
+        int minimumCost[] = new int[cost.length + 1];
+
+        // Start iteration from step 2, since the minimum cost of reaching
+        // step 0 and step 1 is 0
+        for (int i = 2; i < minimumCost.length; i++) {
+            int takeOneStep = minimumCost[i - 1] + cost[i - 1];
+            int takeTwoSteps = minimumCost[i - 2] + cost[i - 2];
+            minimumCost[i] = Math.min(takeOneStep, takeTwoSteps);
+        }
+
+        // The final element in minimumCost refers to the top floor
+        return minimumCost[minimumCost.length - 1];
+    }
+
+    public static void constructMetadata(List<String> metaData,String errorCode,String msg){
+      StringBuilder builder = new StringBuilder();
+      builder.append(buildString("errorCode",errorCode));
+      builder.append(buildString("errorMsg",msg));
+      metaData.add(builder.toString());
+    }
+
+    private static String buildString(String fieldName,String value){
+      return fieldName + ":" + value;
+    }
+
+    public static Date endOfDayOfGivenDate(@NotNull Date date){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 999);
+        return calendar.getTime();
+    }
+
+    public static HashMap<String, String> parseAdditionalInfo(String additionalInfoString) {
+        HashMap<String, String> additionalInfoMap = new HashMap<>();
+        // additionalInfoMap = Arrays.stream(additionalInfoString.split("\\|"))
+        // .map(s -> s.split(":"))
+        // .collect(Collectors.toMap(a -> a[0], a ->a[1]));
+        List<String> additionalInfoList = Arrays.asList(additionalInfoString.split("\\|"));
+        for (String keyval : additionalInfoList) {
+            List<String> keyvallist = Arrays.asList(keyval.split(":", 2));
+            additionalInfoMap.put(keyvallist.get(0), keyvallist.get(1));
+        }
+        return additionalInfoMap;
+    }
 
 
 
 
-    public static void main(String[] args){
+
+
+    public static void main(String[] args) throws ParseException {
         String unmaskedString = "anmol";
 //        String str2 = "kumar";
 //        StringBuilder newStr = new StringBuilder(str1.substring(0,4)).append(str2.substring(1));
@@ -972,43 +1040,29 @@ public class Main {
 //        arr.add(pair1);
 //        arr.add(pair2);
 //        arr.add(pair3);
-//        Collections.sort(arr, new Comparator<Pair>() {
-//            @Override
-//            public int compare(Pair o1, Pair o2) {
-//                return o1.second.compareTo(o2.second);
-//
-//            }
-//        });
-//
-//        Iterator<Pair> it = arr.iterator();
-//        while (it.hasNext()){
-//            System.out.println(it.next().first);
-//        }
-//
-//        System.out.println(getNthDateFromDate(new Date(),-3));
-//        List<Integer> input = Arrays.asList( 2, 1, 3, 3, 2, 1, 4, 5 );
-//        Set<Integer> set = new HashSet<>();
-//        set.addAll(input.subList(0,2));
-//        System.out.println(set.size());
-//
-//        String s = "anmol";
-//        System.out.println(s.substring(0,4));
+//       List<String> errorCode = new ArrayList<>();
+//        constructMetadata(errorCode,"Int-678","some error occurred");
+//        constructMetadata(errorCode,"Int-900","Exception occurred");
+//        System.out.println(errorCode);
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.add(Calendar.HOUR,10);
+//        Date date = calendar.getTime();
+//        System.out.println("Date is" + date);
+//        System.out.println(formatter.format(date));
 
-        String umn = "98777645332671929292929";
-        List<String> list = Arrays.asList(umn.split("\\|"));
-//        System.out.println(list.get(0));
-//        System.out.println(list.get(1));
-
-
-
-        System.out.println(NumberUtils.isDigits(umn));
-
-        String target = "https://pgp-qa5.paytm.in/aoa-subscription";
-        target = target.concat("/api/subscription");
-        System.out.println(target);
-
-
-
+        try {
+            for(int i=0;i<20;i++){
+               if(i == 2){
+                   throw new Exception("Exception occured");
+               }
+                System.out.println(i);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            System.out.println("In final block");
+        }
 
 
     }
