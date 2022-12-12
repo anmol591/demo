@@ -84,30 +84,25 @@ public class GraphTest {
         int[] visited = new int[this.v];
         Arrays.fill(visited,0);
         for (int i=0;i<v;i++){
-            visited[i] = 1;
-            for(int j : adjList.get(i)){
-                if(isUndirectedGraphCyclicUtil(j,visited)) //giving wrong output, need to check
+            if(visited[i] == 0){
+                if(isUndirectedGraphCyclicUtil(i,visited))
                     return true;
             }
-            visited[i] = 0;
         }
         return false;
     }
 
     public boolean isUndirectedGraphCyclicUtil(int curr, int[] visited){
-        if(visited[curr] == 2)
-            return true;
         visited[curr] = 1;
-
         for(int j : adjList.get(curr)){
             if(visited[j] == 1)
-                visited[j] = 2;
-            else {
+                return false;
+            else if(visited[j] == 0){
                 if(isUndirectedGraphCyclicUtil(j,visited))
                     return true;
             }
         }
-        visited[curr] = 0;
+        visited[curr] = 2;
         return false;
     }
 
@@ -122,6 +117,7 @@ public class GraphTest {
         GraphTest g2 = new GraphTest(3);
         g2.addEdge(0,1);
         g2.addEdge(1,2);
+        g2.addEdge(2,0);
 //        g2.addEdge(1,2);
 //        g2.addEdge(2,3);
 ////        g2.addEdge(2,4);

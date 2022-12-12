@@ -14,6 +14,16 @@ class DoublyLinkedListNode {
         this.value = value;
         this.prev = this.next = null;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj)
+            return true;
+        if(obj == null || obj.getClass() != this.getClass())
+            return false;
+        DoublyLinkedListNode obj1 = (DoublyLinkedListNode) obj;
+        return obj1.key == this.key && obj1.value == this.value;
+    }
 }
 
 public class LRUCache {

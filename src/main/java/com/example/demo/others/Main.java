@@ -4,6 +4,7 @@ package com.example.demo.others;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.apache.commons.lang3.time.DurationFormatUtils;
 
 import javax.validation.constraints.NotNull;
 import java.lang.reflect.Array;
@@ -1014,13 +1015,23 @@ public class Main {
         return additionalInfoMap;
     }
 
+    public static void diffInDays(long startDate) throws ParseException {
+        int timeInMinutes = 420;
+//        System.out.println("TimeDiff is in minutes: " + timeDiffInminutes + "timeDiff in hours: " + timeDiffInhours);
+//        boolean isOver = (timeDiffInminutes >= 0 && timeDiffInminutes >= 60);
+        long diff = new Date().getTime() - startDate;
+        boolean isOver = (diff >=0 && diff >= (timeInMinutes*60*1000));
+
+        System.out.println(isOver);
+    }
+
 
 
 
 
 
     public static void main(String[] args) throws ParseException {
-        String unmaskedString = "anmol";
+        String unmaskedString = "prodT7158410,prodT71584100,prodT7158499";
 //        String str2 = "kumar";
 //        StringBuilder newStr = new StringBuilder(str1.substring(0,4)).append(str2.substring(1));
 //        int prefixNoLen = 9;
@@ -1050,19 +1061,18 @@ public class Main {
 //        Date date = calendar.getTime();
 //        System.out.println("Date is" + date);
 //        System.out.println(formatter.format(date));
+//        System.out.println(unmaskedString.contains("prodT715841000"));
+//        String str = "456788822|hhjhj8yykjkjkjkjk";
+//        List<String> items = Arrays.asList(str.split("\\|"));
+//        System.out.println(items.get(1));
+          Calendar calendar = Calendar.getInstance();
+          calendar.add(Calendar.MINUTE, 423);
+          System.out.println("Time is " + calendar.getTime());
 
-        try {
-            for(int i=0;i<20;i++){
-               if(i == 2){
-                   throw new Exception("Exception occured");
-               }
-                System.out.println(i);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        } finally {
-            System.out.println("In final block");
-        }
+
+          diffInDays(calendar.getTime().getTime());
+
+
 
 
     }

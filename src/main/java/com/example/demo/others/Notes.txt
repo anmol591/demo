@@ -1,0 +1,27 @@
+ElasticSearch is built for string matching so as long as our search key is small we can use relational db in that case
+otherwise string based database
+
+All anagrams are permutations of each other, but not all permutations are anagrams
+
+top down approach -> recursion + memoization
+bottom up -> tabulation
+
+//Priority Queue
+-> if priority queue is implemented using heap data structure then time complexity are as follows
+   Insert -> o(log n)
+   Delete -> o(log n)
+   Peek -> o(1)
+   Note: Top priority or lowest priority element is present at the root node and hence the complexity for peek is o(1)
+   For removal and insertion, heapify operations must be implemented which takes O(log n) complexity.
+
+
+-> if priority queue is implemented using Linked list then time complexity are as follows:
+   Insert -> o(n)
+   Delete -> o(1)
+   Peek -> o(1)
+   Note: Highest priority element at head and hence can be removed in O(1) time. For insertion, list needs to be traversed till suitable position found, hence O(n).
+
+   //Initialization
+   PriorityQueue tasks=new PriorityQueue(); //creates queue in ascending order by default
+   PriorityQueue tasks=new PriorityQueue(Collections.reverseOrder()); //creates queue in descending order
+

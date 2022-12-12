@@ -1,5 +1,6 @@
 package com.example.demo.json;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -11,16 +12,22 @@ import java.io.IOException;
 
 public class GsonTester {
     public static void main(String args[]) throws IOException {
-        GsonBuilder builder = new GsonBuilder().setPrettyPrinting();
-        Gson gson = builder.create();
-
-        String jsonString = "{\"name\": \"anmol\",\"age\":21,\"last\":\"kumar\"}";
-
-        Student student = gson.fromJson(jsonString,Student.class); //from json string to student object
-        writeJson(student);
-        System.out.println(readJson());
+//        GsonBuilder builder = new GsonBuilder().setPrettyPrinting();
+//        Gson gson = builder.create();
+//
+//        String jsonString = "{\"name\": \"anmol\",\"age\":21,\"last\":\"kumar\"}";
+//
+//        Student student = gson.fromJson(jsonString,Student.class); //from json string to student object
+//        writeJson(student);
+//        System.out.println(readJson());
 
 //        jsonString = gson.toJson(student); // from student object to json
+        StudentInfo studentInfo = new StudentInfo();
+        Student student = new Student("anmol",22,"karhari");
+        studentInfo.setStudent(student);
+        String str = new ObjectMapper().writeValueAsString(studentInfo.getStudent());
+        System.out.println(str);
+
 
 
     }

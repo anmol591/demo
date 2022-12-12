@@ -10,14 +10,14 @@ public class ChecksumUtility {
 
     public static void createChecksum() throws Exception {
         /* initialize JSON String */
-        String body = "{\"mid\":\"AliOPG01851465523919\",\"subsId\":\"100475298638\",\"custId\":\"\"}";
+        String body = "{\"planName\":\"API Test 23\",\"planDescription\":\"API Test\",\"subscriptionFrequencyUnit\":\"ONDEMAND\",\"subscriptionAmountType\":\"VARIABLE\",\"graceDays\":\"0\",\"autoRetry\":\"false\",\"retryCount\":\"1\",\"trialPeriod\":\"0\",\"isAmountPlanLevel\":\"false\",\"autoRenewal\":\"false\",\"txnAmount\":\"\",\"subscriptionMaxAmount\":\"\",\"mid\":\"INTEGR77698636129383\"}";
 
        /**
             * Generate checksum by parameters we have in body
              * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys
        */
 
-        String paytmChecksum = PaytmChecksum.generateSignature(body, "WJ#2OUTlgSqIjI3D");
+        String paytmChecksum = PaytmChecksum.generateSignature(body, "0@z#pqDCwqYHqWHT");
         System.out.println("generateSignature Returns: " + paytmChecksum);
     }
 
