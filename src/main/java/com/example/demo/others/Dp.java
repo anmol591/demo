@@ -190,10 +190,14 @@ public class Dp {
         int[][] T = new int[m + 1][n + 1];
 
         // fill the lookup table in a bottom-up manner
-        for (int i = 1; i <= m; i++) {
-            for (int j = 1; j <= n; j++) {
+        for (int i = 0; i <= m; i++) {
+            for (int j = 0; j <= n; j++) {
+                if(i==0)
+                    T[i][j] = 0;
+                else if(j==0)
+                    T[i][j] = 0;
                 // if the current character of `X` and `Y` matches
-                if (X.charAt(i - 1) == Y.charAt(j - 1)) {
+                else if (X.charAt(i - 1) == Y.charAt(j - 1)) {
                     T[i][j] = T[i - 1][j - 1] + 1;
                 }
                 // otherwise, if the current character of `X` and `Y` don't match
