@@ -150,7 +150,9 @@ https://leetcode.com/problems/permutations-ii/solution/
 https://www.geeksforgeeks.org/minimum-cost-to-fill-given-weight-in-a-bag/
 
 
+//Design link scaler
 https://github.com/kanmaytacker/fundamentals/blob/master/oop/notes/05-solid-02.md
+https://github.com/kanmaytacker/design-questions/blob/master/notes/03-design-snakes-ladders.md //sanke and ladder design
 
 
 Dependency inversion principle - High level modules should not depend on low level modules/concrete classes instead it should depend on abstraction

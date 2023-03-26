@@ -329,28 +329,10 @@ public class Dp {
     /* 0/1-knapsack - we are not allowed to break items. we either take the whole items or don't take it
     * https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/ */
 
-    public static int ubkUtil(int prices[],int length[],int maxLength,int n,int[][] dp){
-        if(n==0 || maxLength == 0)
-            return 0;
-        if(length[n-1] > maxLength)
-            dp[n][maxLength] = ubkUtil(prices,length,maxLength,n-1,dp);
-        else{
-            dp[n][maxLength] = Math.max(prices[n-1]+ubkUtil(prices,length,maxLength-length[n-1],n,dp),
-                    ubkUtil(prices,length,maxLength,n-1,dp));
-        }
-       return dp[n][maxLength];
-    }
+    // see solution - unboundedknapsack.java
 
-    public static void ubk(){
-        int arr[] = {1,5,8,9,10,17,17,20};
-        int len = 8;
-        int length[] = new int[arr.length];
-        for(int i=0;i<arr.length;i++){
-            length[i] = i+1;
-        }
-        int dp[][] = new int[length.length+1][length.length+1];
-        System.out.println(ubkUtil(arr,length,len,len,dp));
-    }
+
+
 
     //Question-> Given different weight of riceBag and knapsack of capacity w. find minimum no of ricebags required to fill the knapsack
     // assuming that there is unlimited supply of ricebags.
@@ -370,6 +352,21 @@ public class Dp {
             }
         }
         return res;
+    }
+
+
+    //solution-Given different weight of riceBag and knapsack of capacity w. find minimum no of ricebags required to fill the knapsack
+    // assuming that there is only one supply of ricebags.complexity - o(n^2)
+    public static int findMinimumRiceBags(int[] riceBags,int capacity,int[] dp,int n){
+        if(n==0 || capacity <= 0)
+            return 0;
+        if(dp[n] != -1)
+            return dp[n];
+        int minValue = Integer.MAX_VALUE;
+        for(int i=1;i<=n;i++) {
+            minValue = Math.min(minValue,1+findMinimumRiceBags(riceBags,capacity-riceBags[i-1],dp,n));
+        }
+        return dp[n] = minValue;
     }
 
     //0/1 knapsack problem solution
@@ -536,6 +533,8 @@ public class Dp {
 //         int n = arr.length;
 //        System.out.println(getMaxProfit(arr,n));
 //        ubk();
-        System.out.println(Boolean.parseBoolean("true"));
+
+
+
     }
 }
