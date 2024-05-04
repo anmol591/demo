@@ -9,11 +9,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 class Node3{
@@ -63,10 +59,31 @@ public class Test {
     }
 
     public static void main(String[] args){
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.add(Calendar.DAY_OF_MONTH,1);
-//        newDateTime(calendar.getTime());
-        System.out.println(new Date());
+//        Job[] jobs = {new Job(3,6,10),new Job(8,9,12),new Job(1,5,7)};
+        List<Job> jobs1 = new ArrayList<>();
+        jobs1.add(new Job(3,6,10));
+        jobs1.add(new Job(8,9,12));
+        jobs1.add(new Job(1,5,7));
+        Collections.sort(jobs1, new Comparator<Job>() {
+            @Override
+            public int compare(Job o1, Job o2) {
+                return o2.getEndTime()- o1.getEndTime();
+            }
+        });
+        int[] t = new int[jobs1.size()];
+        int maxProfit = Integer.MIN_VALUE;
+        for(int i=0;i< jobs1.size();i++){
+            t[i] = jobs1.get(i).getProfit();
+        }
+
+        for(int i=1;i<jobs1.size();i++){
+            for(int j=0;j<i;j++){
+                if(jobs1.get(i).getStartTime()>=jobs1.get(j).getEndTime()){
+                    t[i] = Math.max(t[j]+ jobs1.get(i).getProfit(),jobs1.get(i).getProfit());
+                    maxProfit = Math.max(t[i],maxProfit);
+                }
+            }
+        }
     }
 
     //1->2->2->1

@@ -32,9 +32,11 @@ class CircularQueue{
         if(front == -1){
             front = 0;
             rear = 0;
+            queue.add(rear,data);
         }
         else if(rear == size-1 && front != 0){
             rear = 0;
+            queue.set(rear,data);
         }
         else{
             rear++;

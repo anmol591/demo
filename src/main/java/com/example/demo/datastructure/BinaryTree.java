@@ -114,4 +114,49 @@ public class BinaryTree {
             }
         }
     }
+
+    static int printVerticalWidth(Node root) {
+        if (root == null) {
+            return 0;
+        }
+
+        Queue<QueueObj> queue = new LinkedList<>();
+        queue.offer(new QueueObj(root, 0));
+        int minHD = 0;
+        int maxHD = 0;
+
+        while (!queue.isEmpty()) {
+            QueueObj current = queue.poll();
+            Node node = current.getNode();
+            int hd = current.getHd();
+
+            // Update minHD and maxHD
+            minHD = Math.min(minHD, hd);
+            maxHD = Math.max(maxHD, hd);
+
+            if (node.getLeft() != null) {
+                queue.offer(new QueueObj(node.getLeft(), hd - 1));
+            }
+            if (node.getRight() != null) {
+                queue.offer(new QueueObj(node.getRight(), hd + 1));
+            }
+        }
+
+        // Vertical width is the difference between maxHD and minHD (+1 for inclusive range)
+        return maxHD - minHD + 1;
+
+    }
+
+
+    public static void main(String[] args) {
+        Node root = new Node(1);
+        root.setLeft( new Node(2));
+        root.setRight(new Node(3));
+        root.getLeft().setLeft(new Node(4));
+        root.getLeft().setRight(new Node(5));
+        root.getRight().setLeft(new Node(6));
+        root.getRight().setRight(new Node(7));
+
+        System.out.println("Vertical width of the binary tree: " + printVerticalWidth(root));
+    }
 }

@@ -4,14 +4,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 class Lis {
     private int max;
@@ -39,7 +32,7 @@ class Lis {
     }
 }
 
-class Job {
+class Job implements Comparable<Job>{
     private int startTime;
     private int endTime;
     private int profit;
@@ -72,6 +65,11 @@ class Job {
 
     public void setProfit(int profit) {
         this.profit = profit;
+    }
+
+    @Override
+    public int compareTo(Job o) {
+        return  o.getProfit()-this.getProfit();
     }
 }
 
@@ -148,9 +146,10 @@ public class Dp {
 
     //https://www.geeksforgeeks.org/longest-increasing-subsequence-dp-3/
 
-    private static void findLIS(int arr[], int n, Lis lis) {
+    private static int findLIS(int arr[], int n, Lis lis) {
         int[] temp = new int[n];
         int[] LIS = new int[n];
+        int max = Integer.MIN_VALUE;
 
         for (int i = 0; i < n; i++)
             LIS[i] = -1;
@@ -171,9 +170,10 @@ public class Dp {
             }
         }
 
-//        for(int j=0;j<n;j++)
-//            if(temp[j] > max)
-//                max = temp[j];
+        for(int j=0;j<n;j++)
+            if(temp[j] > max)
+                max = temp[j];
+        return max;
 
 //           printLis(LIS,n,lis); //wrong solution need to amend
 //    Time complexity- o(n2)
@@ -502,6 +502,29 @@ public class Dp {
 
     }
 
+    final static class Pair<K,V> {
+        private final K key;
+        private final V value;
+
+        private final Map<Integer,String> map;
+
+        public Pair(K key,V value,Map<Integer,String> map) {
+            this.key = key;
+            this.value = value;
+            Map<Integer,String> temp = new HashMap<>();
+            temp.putAll(map);
+            this.map = temp;
+        }
+
+        public K getKey() {
+            return key;
+        }
+
+        public V getValue() {
+            return value;
+        }
+    }
+
     public static void main(String[] args) {
 //        Job[] jobs = new Job[6];
 //        jobs[0] = new Job(1, 3, 5);
@@ -534,7 +557,14 @@ public class Dp {
 //        System.out.println(getMaxProfit(arr,n));
 //        ubk();
 
+        Job[] jobs = new Job[3];
+        jobs[0] = new Job(6,13,15);
+        jobs[1] = new Job(12,15,33);
+        jobs[2] = new Job(10,18,10);
 
+        Arrays.sort(jobs);
+
+        Arrays.stream(jobs).forEach(x-> System.out.println(x.getProfit()));
 
     }
 }

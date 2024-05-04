@@ -96,7 +96,7 @@ public class GraphTest {
         visited[curr] = 1;
         for(int j : adjList.get(curr)){
             if(visited[j] == 1)
-                return false;
+                return false; //wrong here should be true
             else if(visited[j] == 0){
                 if(isUndirectedGraphCyclicUtil(j,visited))
                     return true;

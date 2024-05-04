@@ -14,14 +14,26 @@ public class Important {
     //https://www.geeksforgeeks.org/stream-in-java/
     //Intermediate operations,terminal operations
     static void print(String[] words){
-        Map<String, ArrayList> map = new HashMap<>();
-        List<String> items = Arrays.stream(words)
-                .map(x->x.toCharArray()).
-                        map(y->{Arrays.sort(y); return new String(y); }).collect(Collectors.toList());
-        List<String> capitalWords = Arrays.stream(words).map(String::toUpperCase).collect(Collectors.toList());
-        List<String> t1 = Arrays.stream(words).filter(x->x.startsWith("a")).collect(Collectors.toList());
-        List<String> t2 = Arrays.stream(words).sorted().collect(Collectors.toList());
-        Stream.of(1,2,4,7).map(x->x*2).forEach(System.out::println);
-        Set<Integer> t3 = Stream.of(7,8,2,7,6,8,2,9,0,8).collect(Collectors.toSet());
+//        Map<String, ArrayList> map = new HashMap<>();
+//        List<String> items = Arrays.stream(words)
+//                .map(x->x.toCharArray()).
+//                        map(y->{Arrays.sort(y); return new String(y); }).collect(Collectors.toList());
+//        List<String> capitalWords = Arrays.stream(words).map(String::toUpperCase).collect(Collectors.toList());
+//        List<String> t1 = Arrays.stream(words).filter(x->x.startsWith("a")).collect(Collectors.toList());
+//        List<String> t2 = Arrays.stream(words).sorted().collect(Collectors.toList());
+//        Stream.of(1,2,4,7).map(x->x*2).forEach(System.out::println);
+//        Set<Integer> t3 = Stream.of(7,8,2,7,6,8,2,9,0,8).collect(Collectors.toSet());
+        //boolean anyMatch(predicate) -> predicate is the condition which will return true/false
+        //boolean allMatch(predicate)
+        //boolean nonMatch(predicate)
+        //stream filter(predicate)
+        //map -> to convert an element after applying any operation
+        List<Integer> nums = Arrays.asList(2,3,4,5,1);
+        nums = nums.stream().sorted().collect(Collectors.toList());
+        nums.stream().map(x->x+2).forEach(System.out::println);
+    }
+
+    public static void main(String[] args) {
+        print(new String[]{});
     }
 }

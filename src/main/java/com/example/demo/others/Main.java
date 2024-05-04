@@ -1,13 +1,20 @@
 package com.example.demo.others;
 
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
 import javax.validation.constraints.NotNull;
+import java.io.*;
 import java.lang.reflect.Array;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -16,27 +23,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
-import java.util.Random;
-import java.util.Set;
-import java.util.Stack;
-import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.Vector;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -75,6 +62,7 @@ class Pair{
 public class Main {
     public static final Node EMPTY = new Node();
     private static final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static String GET_URL = "https://raw.githubusercontent.com/arcjsonapi/ApiSampleData/master/api/users";
     static int R = 4;
     static int C = 4;
     static void printSubStr(String str,
@@ -1025,55 +1013,102 @@ public class Main {
         System.out.println(isOver);
     }
 
+    public static int findMinNoOfRiceBags(int ind,int target,int[] arr) {
+        if(target == 0)
+            return 0;
+        if(ind == 0) {
+            if((target%arr[0]) == 0)
+                return target/arr[0];
+            else
+                return Integer.MAX_VALUE;
+        }
+
+        int notTaken = 0 + findMinNoOfRiceBags(ind-1,target,arr);
+        int taken = Integer.MAX_VALUE;
+        if(arr[ind] <= target) {
+            taken = 1 + findMinNoOfRiceBags(ind,target-arr[ind],arr);
+        }
+        return Math.min(taken,notTaken);
+    }
+
+    public static int minRiceBags(int[] weightOfBags, int w) {
+        int n = weightOfBags.length;
+        int[][] dp = new int[n + 1][w + 1];
+        for (int[] row : dp) {
+            Arrays.fill(row, -1);
+        }
+        return minRiceBagsHelper(weightOfBags, w, n, dp);
+    }
+
+    public static int minRiceBagsHelper(int[] weightOfBags, int w, int n, int[][] dp) {
+        if (w == 0) {
+            return 0;
+        }
+        if (n == 0) {
+            return Integer.MAX_VALUE;
+        }
+        if (dp[n][w] != -1) {
+            return dp[n][w];
+        }
+        if (weightOfBags[n - 1] <= w) {
+            dp[n][w] = Math.min(minRiceBagsHelper(weightOfBags, w - weightOfBags[n - 1], n, dp) + 1,
+                    minRiceBagsHelper(weightOfBags, w, n - 1, dp));
+        } else {
+            dp[n][w] = minRiceBagsHelper(weightOfBags, w, n - 1, dp);
+        }
+        return dp[n][w];
+    }
 
 
 
 
 
-    public static void main(String[] args) throws ParseException {
-        String unmaskedString = "prodT7158410,prodT71584100,prodT7158499";
-//        String str2 = "kumar";
-//        StringBuilder newStr = new StringBuilder(str1.substring(0,4)).append(str2.substring(1));
-//        int prefixNoLen = 9;
-//        int suffixNoLen = 9;
-//        if (unmaskedString.length() > prefixNoLen + suffixNoLen) {
-//            StringBuilder str = new StringBuilder(unmaskedString);
-//            String maskString = StringUtils.repeat("*", str.length() - (prefixNoLen + suffixNoLen));
-//            str.replace(prefixNoLen, str.length() - suffixNoLen, maskString);
-//            unmaskedString = str.toString();
+
+    public static void main(String[] args) throws ParseException, IOException {
+//        try {
+//            JsonParser jsonParser = new JsonParser();
+//            URL url = new URL(GET_URL);
+//            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+//            urlConnection.setRequestMethod("GET");
+//            urlConnection.setRequestProperty("Content-Type","Application/json");
+//            InputStreamReader inputStreamReader = new InputStreamReader((InputStream) urlConnection.getContent());
+//            JsonElement root = jsonParser.parse((String) urlConnection.getContent());
+//            System.out.println(root);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
 //        }
+//       List<String> input = new ArrayList<>();
+//       input.add("address.city");
+//       input.add("Equals");
+//       input.add("Surat");
 //
-//        System.out.println(unmaskedString);
-//        Pair pair1 = new Pair(15,new Character('d'));
-//        Pair pair2 = new Pair(8,new Character('a'));
-//        Pair pair3 = new Pair(20,new Character('a'));
-//        List<Pair> arr = new ArrayList<>();
-//        arr.add(pair1);
-//        arr.add(pair2);
-//        arr.add(pair3);
-//       List<String> errorCode = new ArrayList<>();
-//        constructMetadata(errorCode,"Int-678","some error occurred");
-//        constructMetadata(errorCode,"Int-900","Exception occurred");
-//        System.out.println(errorCode);
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.add(Calendar.HOUR,10);
-//        Date date = calendar.getTime();
-//        System.out.println("Date is" + date);
-//        System.out.println(formatter.format(date));
-//        System.out.println(unmaskedString.contains("prodT715841000"));
-//        String str = "456788822|hhjhj8yykjkjkjkjk";
-//        List<String> items = Arrays.asList(str.split("\\|"));
-//        System.out.println(items.get(1));
-          Calendar calendar = Calendar.getInstance();
-          calendar.add(Calendar.MINUTE, 423);
-          System.out.println("Time is " + calendar.getTime());
-
-
-          diffInDays(calendar.getTime().getTime());
-
-
-
+//       List output = new ArrayList<>();
+//       JsonParser jsonParser = new JsonParser();
+//       String[] address = input.get(0).split("\\.");
+//       URL url = new URL(GET_URL);
+//       HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+//       httpURLConnection.setRequestMethod("GET");
+//       httpURLConnection.setRequestProperty("Content-Type","Application/json");
+//       InputStreamReader inputStreamReader = new InputStreamReader((InputStream) httpURLConnection.getContent());
+//       JsonElement jsonElement = jsonParser.parse(inputStreamReader);
+//       JsonArray jsonArray = jsonElement.getAsJsonArray();
+//       for(int i=0;i<jsonArray.size();i++) {
+//           JsonObject userDetailsObj = jsonArray.get(i).getAsJsonObject();
+//           if(userDetailsObj != null) {
+//               JsonObject nestedObj = userDetailsObj.get(address[0]).getAsJsonObject();
+//               if(nestedObj != null && nestedObj.get(address[1]).getAsString().equals(input.get(2))) {
+//                   output.add(userDetailsObj.get("id").getAsInt());
+//               }
+//           }
+//       }
+//        System.out.println(output);
+        URL url = new URL(GET_URL);
+      HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+      urlConnection.setRequestMethod("GET");
+      urlConnection.setRequestProperty("Content-Type","Application.json");
+      InputStreamReader inputStreamReader = new InputStreamReader((InputStream) urlConnection.getContent());
+      JsonParser jsonParser = new JsonParser();
+      JsonElement jsonElement = jsonParser.parse(inputStreamReader);
 
     }
 
