@@ -4,6 +4,8 @@ import com.example.demo.entity.Actor;
 import com.example.demo.entity.Salary;
 import com.example.demo.service.ActorService;
 import com.example.demo.service.SalaryService;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

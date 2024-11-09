@@ -33,14 +33,14 @@ public class TransactionFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         LOG.info("Starting Transaction for req :{}", req.getRequestURI());
 
-        String countryCode = req.getHeader("X-Country-Code");
-        if(StringUtils.isBlank(countryCode)){
-            throw new RequestErrorException("country code is empty");
-        }
-
-        if(!"IND".equalsIgnoreCase(countryCode)){
-            throw new RequestErrorException("Other country except india is not allowed");
-        }
+//        String countryCode = req.getHeader("X-Country-Code");
+//        if(StringUtils.isBlank(countryCode)){
+//            throw new RequestErrorException("country code is empty");
+//        }
+//
+//        if(!"IND".equalsIgnoreCase(countryCode)){
+//            throw new RequestErrorException("Other country except india is not allowed");
+//        }
         chain.doFilter(servletRequest, servletResponse);
         LOG.info("Committing Transaction for req :{}", req.getRequestURI());
     }
